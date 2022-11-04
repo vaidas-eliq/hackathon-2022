@@ -60,12 +60,12 @@ with col1:
     st.markdown(f"""
     | Attribute | Value |
     | :--------- | :-----: |
-    | House type | {selected_location_house_type} |
-    | Heating type | {selected_location_heating_type} |
-    | Hot water type | {selected_location_hot_water_type} |
-    | Number of bedrooms | {selected_location_bedrooms} |
-    | Number of persons | {selected_location_persons} |
-    | Number of electric cars | {selected_location_electric_cars} |
+    | House Type | {selected_location_house_type} |
+    | Heating Type | {selected_location_heating_type} |
+    | Hot Water Type | {selected_location_hot_water_type} |
+    | Number of Bedrooms | {selected_location_bedrooms} |
+    | Number of Persons | {selected_location_persons} |
+    | Number of Electric Cars | {selected_location_electric_cars} |
     """)
 
 with col2:
@@ -87,7 +87,7 @@ with col2:
     _ = ax.plot(PERCENTILES, predictions, color="purple")
     ax.set_ylabel("kWh")
     ax.set_xlabel("Percentile")
-    _ = plt.title("Yearly energy consumption comparison to simiarl homes")
+    _ = plt.title("Yearly energy consumption comparison to similar homes")
     _ = plt.vlines(actual_percentile, ymin=actual_value_kwh-500, ymax=actual_value_kwh+500, color="red")
     st.pyplot(fig)
 
@@ -156,7 +156,7 @@ ELECTRIC = [
     "Floor Heat",
 ]
 if (selected_location_heating_type.strip() in GAS_OIL) and (new_heating_type_formatted.strip() in ELECTRIC):
-    st.subheader("Impact on electricity bill from the swtich")
+    st.subheader("Impact on electricity bill from the switch")
     energy_price = st.number_input("Your average electricity price per kWh", value=0.0)
     if energy_price > 0.0:
         impact_on_bill = int((new_estimated_consumption - actual_value_kwh) * energy_price)
