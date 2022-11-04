@@ -10,11 +10,11 @@ from sklearn.ensemble import GradientBoostingRegressor
 
 
 st.set_page_config(
-    page_title="Home Improvement Analysis",
+    page_title="Similar Homes Explorer",
     page_icon="🏠",
     layout="wide",
 )
-st.header("🏠 Home Improvement Analysis")
+st.header("🏠 Similar Homes Explorer")
 
 DATA_PWD = os.getenv("ELIQ_DATA_PWD", default="").encode()
 if DATA_PWD.decode() == "":
