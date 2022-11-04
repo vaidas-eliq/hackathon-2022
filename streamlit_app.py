@@ -37,6 +37,8 @@ models = joblib.load("./models/percentile_models.sav")
 
 location_ids = list(energy_hp["location_id"].unique())
 location = st.selectbox("Select location", options=location_ids)
+st.write("Suggestion 1: 1839899 - Oil Boiler With Radiators")
+st.write("Suggestion 2: 1850228 - Gas Boiler With Radiators")
 st.subheader(f"Location {location} information:")
 col1, col2 = st.columns(2)
 with col1:
@@ -139,3 +141,26 @@ if new_heating_type_formatted != selected_location_heating_type:
         _ = plt.title("Orignal vs. New Heating Type")
         _ = plt.legend()
         st.pyplot(fig)
+
+GAS_OIL = [
+    "Gas Boiler With Radiators",
+    "Oil Boiler With Radiators",
+    "Solid Fuel",
+]
+ELECTRIC = [
+    "Plug In Electric Heaters",
+    "Night Storage Heaters",
+    "Modern Slimline Night Storage Heaters",
+    "Heat Pump",
+    "Electric Boiler",
+    "Floor Heat",
+]
+if (selected_location_heating_type.strip() in GAS_OIL) and (new_heating_type_formatted.strip() in ELECTRIC):
+    st.subheader("Impact on electricity bill from the swtich")
+    energy_price = st.number_input("Your average electricity price per kWh", value=0.0)
+    if energy_price > 0.0:
+        impact_on_bill = int((new_estimated_consumption - actual_value_kwh) * energy_price)
+        if impact_on_bill > 0.:
+            st.markdown(f"You would have paid additional **{impact_on_bill}** Pounds for the previous year.")
+        else:
+            st.markdown(f"You would have saved **{impact_on_bill}** Pounds for the previous year.")
